@@ -1,0 +1,46 @@
+\NeedsTeXFormat{LaTeX2e}[1996/06/01]
+\ProvidesPackage{styles/hl7}[2014/12/19 v1.0 (MJH)]
+
+\def\verbatim@font{\footnotesize\ttfamily}
+
+\renewcommand{\section}{\@startsection {section}{1}{0pt}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                  {\sffamily\Large\bfseries}}
+                                  
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0pt}%
+                                    {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                    {1.5ex \@plus .2ex}%
+                                    {\sffamily\large\bfseries}}
+                                    
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0pt}%
+                                    {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                    {1.5ex \@plus .2ex}%
+                                    {\sffamily\normalsize\bfseries}}
+
+\definecolor{DarkBlue}{rgb}{0.122, 0.286, 0.490}
+\definecolor{DarkRed}{rgb}{0.753, 0, 0}
+
+\def\frontmatter{%
+    \pagenumbering{roman}
+    \setcounter{page}{1}
+    \renewcommand{\thesection}{\Roman{section}}
+}
+
+\def\mainmatter{%
+    \pagenumbering{arabic}
+    \setcounter{page}{1}
+    \setcounter{section}{0}
+    \renewcommand{\thesection}{\arabic{section}}
+}
+
+\def\backmatter{%
+    \setcounter{section}{0}
+    \renewcommand{\thesection}{\Alph{section}}
+}
+
+% Start each section on a new page
+\makeatletter
+\let\stdsection\section
+\renewcommand\section{\ifnum\c@section>0{\clearpage}\else\fi\stdsection}
+\makeatother

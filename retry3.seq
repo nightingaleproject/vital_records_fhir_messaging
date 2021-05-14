@@ -1,0 +1,12 @@
+@startuml
+participant "Vital Records\nJurisdiction" as j
+participant "NVSS" as n
+
+n -> j: Coding Update
+j -> j: Extract
+j ->x n: Acknowledgement
+...
+n -> j: Resend\nCoding Update
+j -> j: Ignore duplicate
+j -> n: Resend\nAcknowledgement
+@enduml

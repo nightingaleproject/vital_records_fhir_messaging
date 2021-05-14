@@ -1,0 +1,19 @@
+@startuml
+participant "Vital Records\nJurisdiction" as j
+participant "NVSS" as n
+
+j -> n: Death Record Submission
+n -> n: Extract
+n -> j: Acknowledgement
+...
+opt
+  n -> n: Code
+  n -> j: Coding Response
+  j -> j: Extract
+  j -> n: Acknowledgement
+end
+...
+j -> n: Death Record Void
+n -> n: Extract
+n -> j: Acknowledgement
+@enduml

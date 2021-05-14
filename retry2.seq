@@ -1,0 +1,10 @@
+@startuml
+participant "Vital Records\nJurisdiction" as j
+participant "NVSS" as n
+
+n ->x j: Coding Response
+...
+n -> j: Resend\nCoding Response
+j -> j: Extract
+j -> n: Acknowledgement
+@enduml
