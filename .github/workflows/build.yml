@@ -18,11 +18,11 @@ jobs:
           java-package: jre
           architecture: x64
       - name: Checkout
-       uses: actions/checkout@v1
-      -name: Build
-       uses: docker://pandoc/latex:2.9
-       run: make
-       env:
+        uses: actions/checkout@v1
+      - name: Build
+        uses: docker://pandoc/latex:2.9
+        run: make
+        env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           EXTERNAL_REPOSITORY: saulakravitz/vrdr-fsh-publish
           PUBLISH_BRANCH: master
