@@ -9,7 +9,7 @@ j -> n: Resend\nDeath Record Submission
 n -> n: Ignore duplicate
 n -> j: Resend\nAcknowledgement
 ...
-n -> n: Code junk
+n -> n: Code
 n -> j: Coding Response
 j -> j: Extract
 j -> n: Acknowledgement
