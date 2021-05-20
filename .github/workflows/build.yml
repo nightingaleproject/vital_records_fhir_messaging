@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build me
     runs-on: ubuntu-latest
     uses: docker://pandoc 
     steps:
