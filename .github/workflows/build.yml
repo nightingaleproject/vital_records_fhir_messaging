@@ -2,7 +2,7 @@ name: fhir_messaging_for_nvss
 on: 
   push:
     tags:
-    - '*'
+    - '*' 
 jobs:
   build:
     runs-on: ubuntu-latest
