@@ -1,5 +1,4 @@
 name: fhir_messaging_for_nvss
-
 on:
   push:
     branches: [ master ]
@@ -7,7 +6,6 @@ on:
     branches: [ master ]
   workflow_dispatch:
     branches: [ master ]
-
 jobs:
   build:
     name: Build me
