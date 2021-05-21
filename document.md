@@ -6,7 +6,7 @@
 #task_order: '2002016F91567'
 status: 'Draft' # Initial Draft, Draft or Final Draft
 title: 'FHIR Messaging for NVSS'
-version: '1.0'
+version: 'v3.1.0'
 date: 'May 21, 2021'
 #author:
 #- Marc Hadley

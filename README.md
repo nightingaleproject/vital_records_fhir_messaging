@@ -16,7 +16,7 @@ Questions or comments regarding this document should be directed to the ["Death 
 
 ## Prerequisites
 
-1. docker
+1. docker  (LaTeX is invoked using a docker image)
 
 ## Editing the document
 
