@@ -4,7 +4,7 @@ DOCNAME = fhir_messaging_for_nvss
 COMMON = document.md appendices.md Makefile out
 SEQUENCE = submission.png retry.png retry2.png retry3.png error.png update.png void.png recode.png
 PANDOC = docker run --rm --volume "`pwd`:/pandoc" --user `id -u`:`id -g` dalibo/pandocker
-
+TEMPLATE = --template LaTeX/pandoc_template.tex 
 #PANDOC = pandoc
 
 .SUFFIXES : .seq .png
@@ -37,4 +37,4 @@ pdf : out/$(DOCNAME).pdf
 
 out/$(DOCNAME).pdf : $(COMMON) LaTeX/pandoc_template.tex LaTeX/mitre.sty $(SEQUENCE)
 	$(PANDOC)  -f markdown -t latex -o out/appendices.tex --number-sections -V colorlinks=true appendices.md
-	$(PANDOC)  -s -f markdown -t latex -o out/$(DOCNAME).pdf --number-sections --toc -V colorlinks=true --template LaTeX/pandoc_template.tex --include-after-body out/appendices.tex document.md
+	$(PANDOC)  -s -f markdown -t latex -o out/$(DOCNAME).pdf --number-sections --toc -V colorlinks=true $(TEMPLATE) --include-after-body out/appendices.tex document.md

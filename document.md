@@ -1,15 +1,15 @@
 ---
-sponsor: 'National Center for Health Statistics'
-security: 'Restricted Distribution'
-project: 'Modernizing the National Vital Statistics System (NVSS)'
-contract: 'HHSM500201200008I'
-task_order: '2002016F91567'
+#sponsor: 'National Center for Health Statistics'
+#security: 'Restricted Distribution'
+#project: 'Modernizing the National Vital Statistics System (NVSS)'
+#contract: 'HHSM500201200008I'
+#task_order: '2002016F91567'
 status: 'Draft' # Initial Draft, Draft or Final Draft
 title: 'FHIR Messaging for NVSS'
-version: '0.14'
-date: 'August 12th, 2020'
-author:
-- Marc Hadley
+version: '1.0'
+date: 'May 21, 2020'
+#author:
+#- Marc Hadley
 keywords: [NVSS, NCHS, FHIR, VRDR, death, reporting, message, messaging]
 ---
 # Introduction
@@ -22,6 +22,10 @@ The [Vital Records Death Reporting (VRDR) FHIR IG](http://hl7.org/fhir/us/vrdr/2
 
 1. Submission of VRDR documents from vital records jurisdictions to NCHS, and
 2. Return of coded causes of death, race, and ethnicity information from NCHS to vital records jurisdictions.
+
+Questions or comments regarding this document should be directed to the ["Death on FHIR" zulip stream](https://chat.fhir.org/#narrow/stream/179301-Death-on.20FHIR)[^1]. This document will continue to evolve in response to community feedback as well as changes to the VRDR IG or business requirements.
+
+[^1]: https://chat.fhir.org/#narrow/stream/179301-Death-on.20FHIR
 
 # Requirements
 
