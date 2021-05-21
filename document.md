@@ -23,7 +23,7 @@ The [Vital Records Death Reporting (VRDR) FHIR IG](http://hl7.org/fhir/us/vrdr/2
 1. Submission of VRDR documents from vital records jurisdictions to NCHS, and
 2. Return of coded causes of death, race, and ethnicity information from NCHS to vital records jurisdictions.
 
-Questions or comments regarding this document should be directed to the ["Death on FHIR" zulip stream](https://chat.fhir.org/#narrow/stream/179301-Death-on.20FHIR)[^1]. This document will continue to evolve in response to community feedback as well as changes to the VRDR IG or business requirements.
+Questions or comments regarding this document should be directed to the ["Death on FHIR" zulip stream](https://chat.fhir.org/#narrow/stream/179301-Death-on.20FHIR)[^1]. This document will evolve in response to community feedback as well as changes to the VRDR IG or business requirements.
 
 [^1]: https://chat.fhir.org/#narrow/stream/179301-Death-on.20FHIR
 
