@@ -7,7 +7,7 @@
 status: 'Draft' # Initial Draft, Draft or Final Draft
 title: 'FHIR Messaging for NVSS'
 version: 'v3.1.0'
-date: 'May 21, 2021'
+date: 'June 2, 2021'
 #author:
 #- Marc Hadley
 keywords: [NVSS, NCHS, FHIR, VRDR, death, reporting, message, messaging]
