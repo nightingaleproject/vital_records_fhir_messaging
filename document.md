@@ -65,7 +65,7 @@ NCHS needs a mechanism to report errors to vital records jurisdictions in respon
 
 # FHIR Messaging
 
-As described earlier, the [Vital Record Death Reporting (VRDR) FHIR IG](http://hl7.org/fhir/us/vrdr/2019May/Introduction.html) specifies how to represent the information sent from vital records jurisdictions to NCHS using FHIR documents. However, it does not specify the mechanism that is used to exchange those FHIR documents, nor how the coded response is represented and returned to the submitter. This document describes the use of FHIR Messaging to accomplish this essential function. [FHIR Messaging](http://hl7.org/fhir/messaging.html) defines:
+As described earlier, the [Vital Record Death Reporting (VRDR) FHIR IG](http://hl7.org/fhir/us/vrdr/STU1) specifies how to represent the information sent from vital records jurisdictions to NCHS using FHIR documents. However, it does not specify the mechanism that is used to exchange those FHIR documents, nor how the coded response is represented and returned to the submitter. This document describes the use of FHIR Messaging to accomplish this essential function. [FHIR Messaging](http://hl7.org/fhir/messaging.html) defines:
 
 1. A standard [MessageHeader](http://hl7.org/fhir/messageheader.html) resource that captures common message metadata including
     a. An id that is useful for correlating requests and replies,
@@ -78,7 +78,7 @@ As described earlier, the [Vital Record Death Reporting (VRDR) FHIR IG](http://h
 
 3. A standard FHIR process message operation and an alternate pattern for exchange of messages using the FHIR REST API for messaging.
 
-5. A pattern for reliable message exchange over unreliable channels. 
+5. A pattern for reliable message exchange over unreliable channels.
 
 The remainder of this document describes how these capabilities can be applied to submission of death records to NCHS and the return of coded cause of death, race and ethnicity information to vital records jurisdictions.
 
@@ -148,7 +148,7 @@ The time between the Death Record Submission and Acknowledgement is expected to 
 
 The second (optional) Code, Coding Update, Extract and Acknowledgement steps highlight that cause of death coding may be undertaken separately to race and ethnicity encoding. A single Death Record Submission message could result in both a  Coding Response and a Coding Update message, one for cause of death, the other for race and ethnicity coding. The first coding for a given record should be sent using a Coding Response message, subsequent codings for the same record should be sent using a Coding Update message. For brevity, this separation of coding for causes of death and race and ethnicity is omitted from subsequent diagrams but should be considered to be possible in all cases.
 
-The purpose of acknowledgement messages is to support reliability in the exchange of death records and coding responses, see [Retrying Requests](#retries) for further details. Acknowledgements are a feature of the FHIR messaging system, they are not intended to be exposed to jurisdiction death registration systems or NVSS directly. 
+The purpose of acknowledgement messages is to support reliability in the exchange of death records and coding responses, see [Retrying Requests](#retries) for further details. Acknowledgements are a feature of the FHIR messaging system, they are not intended to be exposed to jurisdiction death registration systems or NVSS directly.
 
 ## Updating Prior Death Record Submission
 
@@ -324,6 +324,17 @@ Additional and specific `Header` property values:
 - `source.endpoint` is fixed to `http://nchs.cdc.gov/vrdr_submission`
 
 A coding response or coding update may contain cause of death coding information, race and ethnicity coding information or both. A complete example is included in section 6.
+Additional Optional `Record` parameters:
+
+- `rec_mo` is a `valueUnsignedInt` representing the month which NCHS received the record.
+- `rec_dy` is a `valueUnsignedInt` representing the day which NCHS received the record.
+- `rec_year` is a `valueUnsignedInt` representing the year which NCHS received the record.
+- `cs` is a `valueCoding` containing a valid code from Page 23 of the [PC-ACME/TRANSAX](https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Software/MICAR/Data_Entry_Software/ACME_TRANSAX/Documentation/auser.pdf) user guide.
+- `ship` is a `valueString` containing an AlphaNumeric NCHS shipment number. Usually the month of death or month of receipts.
+- `sys_rej` is a `valueString` containing a valid code from [System Reject Codes (NCHS)](https://phinvads.cdc.gov/vads/ViewValueSet.action?id=CFF72380-C37E-4947-A809-43B00ACB1EF9) with all whitespaces and dashes removed. For example: "MICAR Reject - Dictionary Match" should be "MICARRejectDictionaryMatch". A full list of strings can also be found in the [VRDR library](https://github.com/nightingaleproject/vrdr-dotnet/blob/8becd63/VRDR.Messaging/CodingResponseMessage.cs#L352-L362).
+- `int_rej` is a `valueCoding` containing a one-character reject codes from the [Instructions for Classifying Multiple Causes OF Death](https://www.cdc.gov/nchs/data/dvs/2b_2017.pdf) code document for values.
+
+A coding response or coding update may contain cause of death coding information, race and ethnicity coding information, manner of death coding information, place of injury coding information, or some combination of all four types of information. A complete example is included in section 6.
 
 ### Race and Ethnicity Coding
 
@@ -340,7 +351,7 @@ Additional `Record` property values for race and ethnicity coding:
 
 Additional `Record` property values for causes of death coding:
 
-- One `parameter.name` of `underlying_cause_of_death` with a `valueCoding` that contains the code for the underlying cause of death. Note that `valueCoding` includes an optional `display` field that can be used to transmit the text description of the assigned code - this will not be populated. 
+- One `parameter.name` of `underlying_cause_of_death` with a `valueCoding` that contains the code for the underlying cause of death. Note that `valueCoding` includes an optional `display` field that can be used to transmit the text description of the assigned code - this will not be populated.
 - One `parameter.name` of `record_cause_of_death` with one or more `part` entries, each with
   + `part.name` of `coding` with a `valueCoding` that contains a coding of a cause of death. Note that `valueCoding` includes an optional `display` field that can be used to transmit the text description of the assigned code - this will not be populated.
 - Zero or more `parameter.name` of `entity_axis_code`, each with:
@@ -352,6 +363,16 @@ Additional `Record` property values for causes of death coding:
     - __5__: Part I, Line E
     - __6__: Part II
   + One or more `part.name` of `coding` with a `valueCoding` that specify the codes assigned to the axis entry. The order of these codes corresponds to the order of the concepts in the text. Note that `valueCoding` includes an optional `display` field that can be used to transmit the text description of the assigned code - this will not be populated.
+
+### Manner of Death Coding
+
+The manner of death is represented by a field called `manner`. This field should contain a valid `valueString` from the list of values provided in the [VRDR library](https://github.com/nightingaleproject/vrdr-dotnet/blob/8becd63d901c0870cd2cc9c3040947d7da1125a6/VRDR.Messaging/CodingResponseMessage.cs#L293-L305).
+
+### Place of Injury Coding
+
+The Place of Injury field is represented by two fields, a `injpl` field containing a valid `valueString` from the [ICD-10 Place of Occurrence](https://phinvads.cdc.gov/vads/ViewCodeSystem.action?id=2.16.840.1.114222.4.5.320) Code System. All `/` should be replaced with `Or`, and all `,` and `<space>` characters should be removed. Example: "Street/Highway" should be "StreetOrHighway". A full list of strings can also be found in the [VRDR library](https://github.com/nightingaleproject/vrdr-dotnet/blob/8becd63d901c0870cd2cc9c3040947d7da1125a6/VRDR.Messaging/CodingResponseMessage.cs#L293-L305).
+
+There is an additional optional field, `other_specified_place`, which can be set if `injpl` is set. `other_specified_place` is a freeform `valueString` containing any location value.
 
 ## Extraction Error Response
 
@@ -531,11 +552,15 @@ Given an input Cause of Death:
 
 Assuming NVSS produced the following coding:
 
-Underlying COD: 
+Underlying COD:
 
 - A047 "Enterocolitis due to Clostridium difficile"
 
-Record Axis Codes: 
+Place of Injury:
+
+- Other Specified Place
+
+Record Axis Codes:
 
 - A047 "Enterocolitis due to Clostridium difficile"
 - A419 "Sepsis, unspecified organism"
@@ -545,7 +570,7 @@ Record Axis Codes:
 - R579 "Shock, unspecified"
 - R688 "Other general symptoms and signs"
 
-Entity Axis Codes: 
+Entity Axis Codes:
 
 - R688 "Other general symptoms and signs" (line 1, position 1)
 - J960 "Acute respiratory failure" (line 2, position 1)
@@ -573,6 +598,41 @@ This would be represented as follows.
     {
       "name": "death_year",
       "valueUnsignedInt": 2018
+    },
+    {
+      "name": "rec_mo",
+      "valueUnsignedInt": 12
+    },
+    {
+      "name": "rec_dy",
+      "valueUnsignedInt": 1
+    },
+    {
+      "name": "rec_yr",
+      "valueUnsignedInt": 2018
+    },
+    {
+      "name": "cs",
+      "valueCoding": {
+        "system": "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Software/MICAR/Data_Entry_Software/ACME_TRANSAX/Documentation/auser.pdf",
+        "code": "8"
+      }
+    },
+    {
+      "name": "ship",
+      "valueString": "B201901"
+    },
+    {
+      "name": "sys_rej",
+      "valueString": "NotRejected"
+    },
+    {
+      "name": "injpl",
+      "valueString": "OtherSpecifiedPlace"
+    },
+    {
+      "name": "other_specified_place",
+      "valueString": "Unique Location"
     },
     {
       "name": "state_auxiliary_id",
