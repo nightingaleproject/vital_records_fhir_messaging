@@ -14,7 +14,7 @@ keywords: [NVSS, NCHS, FHIR, VRDR, death, reporting, message, messaging]
 ---
 # Introduction
 
-Note:  This document has been superseded as of November 2021 by a [FHIR Implementation Guide](http://build.fhir.org/ig/nightingaleproject/vital_records_fhir_messaging_ig/branches/main/) that describes the same interface.
+Note:  This document has been superseded as of November 2021 by a [FHIR Implementation Guide](http://build.fhir.org/ig/nightingaleproject/vital_records_fhir_messaging_ig/branches/main/) that describes the same interface. Please refer to the FHIR Implementation guide.
 
 Vital records jurisdictions submit information on deaths in their jurisdiction to the U.S. National Center for Health Statistics (NCHS). For each submission, NCHS codes all causes of death, races, and ethnicities and returns the information to the submitter.
 
