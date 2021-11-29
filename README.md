@@ -4,12 +4,17 @@ Note:  This document has been superseded as of November 2021 by a [FHIR Implemen
 
 Vital records jurisdictions submit information on deaths in their jurisdiction to the U.S. National Center for Health Statistics (NCHS). For each submission, NCHS codes all causes of death, races, and ethnicities and returns the information to the submitter.
 
-The [Vital Records Death Reporting (VRDR) FHIR IG](http://hl7.org/fhir/us/vrdr/2019May/Introduction.html) specifies how to represent the information sent from vital records jurisdictions to NCHS using FHIR documents. It does not specify how such data is exchanged nor how the coding information is represented and returned to the submitter.
+The [Vital Records Death Reporting (VRDR) FHIR IG](http://hl7.org/fhir/us/vrdr/) specifies how to represent the information sent from vital records jurisdictions to NCHS using FHIR documents. It does not specify how such data is exchanged nor how the coding information is represented and returned to the submitter.
 
 [FHIR Messaging](http://hl7.org/fhir/messaging.html) defines how to use FHIR in a message exchange scenario. This document describes the use of FHIR Messaging for:
 
 1. Submission of VRDR documents from vital records jurisdictions to NCHS, and
 2. Return of coded causes of death, race, and ethnicity information from NCHS to vital records jurisdictions.
+
+The document can be downloaded in PDF format by
+
+1. Clicking on the release marked "Latest" in the releases section to the right of this page to navigate to the latest release page.
+2. Clicking on the fhir_messaging_for_nvss.pdf document in the Assets section of the latest release page.
 
 Questions or comments regarding this document should be directed to the ["Death on FHIR" zulip stream](https://chat.fhir.org/#narrow/stream/179301-Death-on.20FHIR)[^1]. This document will continue to evolve in response to community feedback as well as changes to the VRDR IG or business requirements.
 
