@@ -1,5 +1,7 @@
 # Vital Records FHIR Messaging
 
+Note:  This document has been superseded as of November 2021 by a [FHIR Implementation Guide](http://build.fhir.org/ig/nightingaleproject/vital_records_fhir_messaging_ig/branches/main/) that describes the same interface.
+
 Vital records jurisdictions submit information on deaths in their jurisdiction to the U.S. National Center for Health Statistics (NCHS). For each submission, NCHS codes all causes of death, races, and ethnicities and returns the information to the submitter.
 
 The [Vital Records Death Reporting (VRDR) FHIR IG](http://hl7.org/fhir/us/vrdr/2019May/Introduction.html) specifies how to represent the information sent from vital records jurisdictions to NCHS using FHIR documents. It does not specify how such data is exchanged nor how the coding information is represented and returned to the submitter.
@@ -21,7 +23,7 @@ Questions or comments regarding this document should be directed to the ["Death 
 ## Editing the document
 
 1. Clone this repository
-1. Edit the line that read `DOCNAME = deliverable_name` in `Makefile` to set the name of your deliverable 
+1. Edit the line that read `DOCNAME = deliverable_name` in `Makefile` to set the name of your deliverable
 1. Edit `document.md` and `appendices.md` to enter your content
 1. Run `make` in the root of this repository
 1. Output is in the `out` directory

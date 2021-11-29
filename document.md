@@ -6,13 +6,15 @@
 #task_order: '2002016F91567'
 status: 'Draft' # Initial Draft, Draft or Final Draft
 title: 'FHIR Messaging for NVSS'
-version: 'v3.1.0'
-date: 'June 2, 2021'
-#author:    
+version: 'v3.1.1'
+date: 'November 29, 2021'
+#author:
 #- Marc Hadley
 keywords: [NVSS, NCHS, FHIR, VRDR, death, reporting, message, messaging]
 ---
 # Introduction
+
+Note:  This document has been superseded as of November 2021 by a [FHIR Implementation Guide](http://build.fhir.org/ig/nightingaleproject/vital_records_fhir_messaging_ig/branches/main/) that describes the same interface.
 
 Vital records jurisdictions submit information on deaths in their jurisdiction to the U.S. National Center for Health Statistics (NCHS). For each submission, NCHS codes all causes of death, races, and ethnicities and returns the information to the submitter.
 
@@ -42,7 +44,7 @@ Vital records jurisdictions need a mechanism to submit VRDR Death Certificate Do
 Vital records jurisdictions need a mechanism to update VRDR Death Certificate Documents previously submitted to NCHS and this should not rely on patient matching algorithms but instead use embedded identifiers for record correlation.
 
 Vital records jurisdictions need a mechanism to void a single or a block of death certificates. Voiding may target previously submitted documents or may be used to inform NCHS that a specific set of certificate numbers will not be used in the future.
- 
+
 ## Coding Response
 
 NCHS needs a mechanism to send coded causes of death as well as coded race and ethnicity information to vital records jurisdictions in response to receipt of a VRDR Death Certificate Document. NCHS also needs a mechanism to update previously-sent coding information. Causes of death codings may be sent separately from race and ethnicity codings. Updates to either may also be sent separately.
@@ -101,7 +103,7 @@ Figure 1 illustrates the high level components of a FHIR messaging based NVSS:
 
 - __NVSS__: NCHS systems for processing and coding death reports
 
-- __FHIR VRDR__: A FHIR document formatted according to the [Vital Record Death Reporting (VRDR) FHIR IG](http://hl7.org/fhir/us/vrdr/2019May/Introduction.html) 
+- __FHIR VRDR__: A FHIR document formatted according to the [Vital Record Death Reporting (VRDR) FHIR IG](http://hl7.org/fhir/us/vrdr/2019May/Introduction.html)
 
 - __FHIR Coding or Error__: A FHIR representation of either:
   - Causes of death coding, races and ethnicities coding, or both
@@ -223,7 +225,7 @@ All messages defined in the specification share the following common elements. S
         -- Header [FHIR MessageHeader]
         |
         -- Record [FHIR Parameters]
-        
+
 `Message` property values:
 
 - `type` is fixed to `message`
@@ -400,7 +402,7 @@ Additional and specific `Header` property values:
   * `severity` from [issue-severity value set](http://hl7.org/fhir/valueset-issue-severity.html)
   * `code` from [issue-type value set](http://hl7.org/fhir/valueset-issue-type.html)
   * `diagnostics` is a human-readable description of the issue
-  
+
 # Examples
 
 ## Message
