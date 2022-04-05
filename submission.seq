@@ -6,10 +6,20 @@ j -> n: Death Record Submission
 n -> n: Extract
 n -> j: Acknowledgement
 ...
-n -> n: Code
-n -> j: Coding Response
-j -> j: Extract
-j -> n: Acknowledgement
+alt    Automated Coding
+  n -> n: Code
+  n -> j: Coding Response
+  j -> j: Extract
+  j -> n: Acknowledgement
+else   Manual Coding
+  n -> j: Coding Status Update
+  j -> n: Acknowledgement
+  ...
+  n -> n: Code
+  n -> j: Coding Response
+  j -> j: Extract
+  j -> n: Acknowledgement
+end
 ...
 opt
   n -> n: Code
