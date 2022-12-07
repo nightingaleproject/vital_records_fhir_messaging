@@ -5,10 +5,8 @@ participant "NVSS" as n
 j -> n: Death Record Submission
 n -> n: Extract
 n -> j: Extraction\nError Response
-j -> n: Acknowledgement
 ...
 n -> j: Coding Response
 j -> j: Extract
 j -> n: Extraction\nError Response
-n -> j: Acknowledgement
 @enduml
